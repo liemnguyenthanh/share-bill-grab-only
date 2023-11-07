@@ -12,7 +12,7 @@ type DataRowType = {
   title: string;
 }
 
-const ResultFees = () => {
+export const ShareBillResult = () => {
   const { dishItems, fees } = useContext(HomeContext)
 
   const [totalMembers, setTotalMembers] = useState(1)
@@ -90,5 +90,3 @@ const ResultFees = () => {
     </Stack>
   )
 }
-
-export default ResultFees

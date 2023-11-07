@@ -1,9 +1,7 @@
 'use client'
 import { HomeProvider } from '@/providers';
 import { Container, Grid } from '@mui/material';
-import { DishManage } from '../molucules/dish-manage';
-import FeesManage from '../molucules/fee-manage';
-import ResultFees from '../molucules/result';
+import { DishManage, FeesManage, ShareBillResult } from '../molucules';
 
 export const HomePage = () => {
   return (
@@ -17,7 +15,7 @@ export const HomePage = () => {
             <FeesManage />
           </Grid>
         </Grid>
-        <ResultFees />
+        <ShareBillResult />
       </Container>
     </HomeProvider>
   )

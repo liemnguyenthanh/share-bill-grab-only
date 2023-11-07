@@ -8,7 +8,7 @@ import { FileUploader } from 'react-drag-drop-files';
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 
-const FeesManage = () => {
+export const FeesManage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { updateFees, fees } = useContext(HomeContext)
 
@@ -54,5 +54,3 @@ const FeesManage = () => {
     </Box>
   )
 }
-
-export default FeesManage
