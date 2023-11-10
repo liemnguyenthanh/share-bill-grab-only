@@ -1,7 +1,7 @@
 'use client'
 import { HomeProvider } from '@/providers';
 import { Container, Grid } from '@mui/material';
-import { DishManage, FeesManage, ShareBillResult } from '../molucules';
+import { DishManage, FeesManage, ShareBillResult } from '../molecules';
 
 export const HomePage = () => {
   return (
