@@ -72,4 +72,8 @@ export function convertToVND(number: number) {
   return vndString;
 }
 
+export function classnames(...classes: Array<string | boolean | undefined>): string {
+  return classes.filter((classname) => typeof classname === 'string').join(' ');
+}
+
 

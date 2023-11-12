@@ -43,7 +43,6 @@ export const DishManage = () => {
       <FileUploader handleChange={handleUploadDishItems} name="file" types={fileTypes} />
 
       {isLoading && <CircularProgress />}
-
       <Grid container border={1} mt={3} bgcolor={'#333333'}>
         <Grid item md={7}>
           <Typography component='p' p={1} color={'white'}>Name</Typography>
