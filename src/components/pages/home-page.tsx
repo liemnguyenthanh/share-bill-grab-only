@@ -8,10 +8,10 @@ export const HomePage = () => {
     <HomeProvider>
       <Container>
         <Grid container columnSpacing={5} my={2}>
-          <Grid item md={6}>
+          <Grid item md={8}>
             <DishManage />
           </Grid>
-          <Grid item md={6}>
+          <Grid item md={4}>
             <FeesManage />
           </Grid>
         </Grid>

@@ -24,8 +24,7 @@ export const DishManage = () => {
     setIsLoading(false)
     const dataSource = res?.
       text.split('\n') // convert to array
-      .filter((item: string) => !!item) // remove empty
-      .filter((item: string) => item.substring(0, 2).includes('x')) ?? []
+      .filter((item: string) => !!item)
 
     const tableData = parseBillItems(dataSource)
     updateDishItems(tableData)
@@ -62,7 +61,7 @@ export const DishManage = () => {
               dishItems.map((row, index) => (
                 <Grid container border={1} key={index}>
                   <Grid item md={7}>
-                    <Typography component='p' p={1}>
+                    <Typography component='p' p={1} whiteSpace='pre-line'>
                       {row.name}
                     </Typography>
                   </Grid>

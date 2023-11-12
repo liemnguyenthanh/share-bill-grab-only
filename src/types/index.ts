@@ -7,5 +7,5 @@ export type DishType = {
 export type FeeType = {
   subtotal: number;
   shipping: number;
-  discount: number[]
+  discount: number;
 }

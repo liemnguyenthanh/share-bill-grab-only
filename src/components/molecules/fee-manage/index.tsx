@@ -41,11 +41,7 @@ export const FeesManage = () => {
               <Stack gap={1}>
                 <Typography>Total: <b>{convertToVND(fees.subtotal)}</b></Typography>
                 <Typography>Applicable fees : <b>{convertToVND(fees.shipping)}</b></Typography>
-                <Typography>Discount : <b>{
-                  convertToVND(fees.discount.reduce((a, c) => (a += c), 0))
-
-                }</b></Typography>
-
+                <Typography>Discount : <b>{convertToVND(fees.discount)}</b></Typography>
               </Stack>
             )
             : 'Please upload fees'

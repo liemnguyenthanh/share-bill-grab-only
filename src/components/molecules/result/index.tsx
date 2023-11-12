@@ -1,10 +1,10 @@
 'use client'
 import React, { useContext, useMemo, useState } from 'react'
 import { Box, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
-import { convertToVND } from '@/utils/helper'
+import { convertToVND, getTotalMoneyFinal } from '@/utils/helper'
 import { HomeContext } from '@/providers'
 
-type DataRowType = {
+export type DataRowType = {
   fullName: string;
   price: number;
   discount: number;
@@ -32,7 +32,7 @@ export const ShareBillResult = () => {
         const discountPercent = item.price / fees.subtotal
         // fee shipping for each 
         const FSF = fees.shipping / totalMembers
-        const finalPrice = item.price * (1 - discountPercent) + FSF
+        const finalPrice = (item.price - (fees.discount * discountPercent)) + FSF
         const row: DataRowType = {
           fullName: '',
           price: item.price,
@@ -40,6 +40,7 @@ export const ShareBillResult = () => {
           finalPrice,
           title: item.name
         }
+        
         for (let index = 0; index < item.amount; index++) {
           result.push(row)
         }
@@ -59,7 +60,7 @@ export const ShareBillResult = () => {
 
   return (
     <Stack gap={2}>
-      <TextField onChange={handleChangeTotal} placeholder='Số người đặt món ở đây nè mấy ní??'/>
+      <TextField onChange={handleChangeTotal} placeholder='Số người đặt món ở đây nè mấy ní??' />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -79,7 +80,7 @@ export const ShareBillResult = () => {
               >
                 <TableCell align="right">{row.fullName}</TableCell>
                 <TableCell align="right">{convertToVND(row.price)}</TableCell>
-                <TableCell align="right">{row.discount}</TableCell>
+                <TableCell align="right">{Number(row.discount).toFixed(3)}</TableCell>
                 <TableCell align="right">{convertToVND(row.finalPrice)}</TableCell>
                 <TableCell align="right">{row.title}</TableCell>
               </TableRow>
@@ -87,6 +88,10 @@ export const ShareBillResult = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Stack gap={2}>
+        <Typography>Total money: {convertToVND(getTotalMoneyFinal(dataTable))}</Typography>
+      </Stack>
     </Stack>
   )
 }
