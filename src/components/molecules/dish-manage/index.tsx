@@ -2,7 +2,7 @@
 import { HomeContext } from '@/providers';
 import { postFile } from '@/services';
 import { convertToVND, parseBillItems } from '@/utils/helper';
-import { Box, CircularProgress, Grid, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
 import { Fragment, useContext, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 
@@ -17,6 +17,7 @@ const messageStatus: any = {
 export const DishManage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { dishItems, updateDishItems, fees } = useContext(HomeContext)
+  const [uploadMore, setUploadMore] = useState(false)
 
   const handleUploadDishItems = async (file: any) => {
     setIsLoading(true)
@@ -27,7 +28,9 @@ export const DishManage = () => {
       .filter((item: string) => !!item)
 
     const tableData = parseBillItems(dataSource)
-    updateDishItems(tableData)
+
+    const data = uploadMore ? [...tableData, ...dishItems] : tableData
+    updateDishItems(data)
   };
 
 
@@ -38,7 +41,10 @@ export const DishManage = () => {
           maxWidth: 'none !important'
         }
       }}>
-      <Typography fontSize={24} mb={2}>Dish Items</Typography>
+      <Box mb={2} display='flex'  justifyContent='space-between' alignItems='center'>
+        <Typography fontSize={24} >Dish Items</Typography>
+        <Button variant='outlined' onClick={() => setUploadMore(pre => !pre)}>Upload more: <b>{uploadMore ? 'on' : 'off'}</b></Button>
+      </Box>
       <FileUploader handleChange={handleUploadDishItems} name="file" types={fileTypes} />
 
       {isLoading && <CircularProgress />}
