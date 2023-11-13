@@ -14,16 +14,7 @@ export type DataRowType = {
 }
 
 export const ShareBillResult = () => {
-  const { dishItems, fees } = useContext(HomeContext)
-
-  const [totalMembers, setTotalMembers] = useState(1)
-
-  const handleChangeTotal = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | undefined) => {
-    const value = event?.target.value
-    if (value) {
-      setTotalMembers(parseFloat(value))
-    }
-  }
+  const { dishItems, fees, totalMembers } = useContext(HomeContext)
 
   const dataTable: DataRowType[] = useMemo(() => {
     const result: DataRowType[] = []
@@ -61,7 +52,6 @@ export const ShareBillResult = () => {
 
   return (
     <Stack gap={2}>
-      <TextField onChange={handleChangeTotal} placeholder='Số người đặt món ở đây nè mấy ní??' />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>

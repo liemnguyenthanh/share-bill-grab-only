@@ -1,7 +1,7 @@
 'use client'
 import { HomeProvider } from '@/providers';
-import { Container, Grid } from '@mui/material';
-import { DishManage, FeesManage, ShareBillResult } from '../molecules';
+import { Container, Grid, Stack } from '@mui/material';
+import { DishManage, FeesManage, ShareBillResult, Steps } from '../molecules';
 
 export const HomePage = () => {
   return (
@@ -15,7 +15,10 @@ export const HomePage = () => {
             <FeesManage />
           </Grid>
         </Grid>
-        <ShareBillResult />
+        <Stack gap={2}>
+          <Steps />
+          <ShareBillResult />
+        </Stack>
       </Container>
     </HomeProvider>
   )

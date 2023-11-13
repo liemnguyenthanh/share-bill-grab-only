@@ -2,7 +2,7 @@
 import { HomeContext } from '@/providers';
 import { postFile } from '@/services';
 import { convertToVND, parseBillDetails, parseBillItems } from '@/utils/helper';
-import { Box, CircularProgress, Grid, Stack, Typography } from '@mui/material';
+import { Box, CircularProgress, Grid, Stack, TextField, Typography } from '@mui/material';
 import { Fragment, useContext, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 
@@ -16,7 +16,7 @@ const messageStatus: any = {
 
 export const FeesManage = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const { updateFees, fees, dishItems } = useContext(HomeContext)
+  const { updateFees, fees, dishItems, updateTotalMembers } = useContext(HomeContext)
 
   const handleUploadFee = async (file: any) => {
     setIsLoading(true)
@@ -29,6 +29,13 @@ export const FeesManage = () => {
     updateFees(result)
   }
 
+  const handleChangeTotal = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | undefined) => {
+    const value = event?.target.value
+    if (value) {
+      updateTotalMembers(parseFloat(value))
+    }
+  }
+
   return (
     <Stack sx={{
       'label': {
@@ -38,7 +45,7 @@ export const FeesManage = () => {
       justifyContent='space-between'
       height={1}
     >
-      <Box>
+      <Box borderBottom={3} pb={5}>
         <Typography fontSize={24} mb={2}>Fees</Typography>
         <FileUploader handleChange={handleUploadFee} name="file" types={fileTypes} />
 
@@ -47,7 +54,7 @@ export const FeesManage = () => {
         {
           fees ?
             (
-              <Stack gap={1}>
+              <Stack gap={1} mt={3}>
                 <Typography>Total: <b>{convertToVND(fees.subtotal)}</b></Typography>
                 <Typography>Applicable fees : <b>{convertToVND(fees.shipping)}</b></Typography>
                 <Typography>Discount : <b>{convertToVND(fees.discount)}</b></Typography>
@@ -57,7 +64,7 @@ export const FeesManage = () => {
         }
 
       </Box>
-      <Box >
+      <Stack gap={2}>
         {(() => {
           const total = dishItems.reduce((a, c) => (a += (c.amount * c.price)), 0)
           let status = '1'
@@ -68,7 +75,7 @@ export const FeesManage = () => {
           return (
             <Fragment>
               <Typography component='p' display='flex' gap={1} mt={1}>
-                Compare Total: <b>{convertToVND(total)}</b></Typography>
+                Compare Total <Typography fontSize={12}>(Dish and Fees)</Typography>: <b>{convertToVND(total)}</b></Typography>
               <Typography>
                 {messageStatus[status]}
               </Typography>
@@ -76,7 +83,9 @@ export const FeesManage = () => {
           )
         })()
         }
-      </Box>
+
+        <TextField onChange={handleChangeTotal} placeholder='Số người đặt món ở đây nè mấy ní??' fullWidth />
+      </Stack>
     </Stack>
   )
 }
