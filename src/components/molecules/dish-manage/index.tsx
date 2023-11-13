@@ -1,18 +1,13 @@
 'use client'
+import { StyledTableCell } from '@/components/atoms';
 import { HomeContext } from '@/providers';
 import { postFile } from '@/services';
 import { convertToVND, parseBillItems } from '@/utils/helper';
-import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
-import { Fragment, useContext, useState } from 'react';
+import { Box, Button, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { useContext, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 
 const fileTypes = ["JPG", "PNG", "GIF"];
-
-const messageStatus: any = {
-  '1': <Typography color={'blue'}>upload fees to compare....</Typography>,
-  '2': <Typography color={'#2d5e27'}>valid with fees</Typography>,
-  '3': <Typography color={'#fb1919'}>something is wrong, total dish item is not equal with total fee</Typography>,
-}
 
 export const DishManage = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -41,64 +36,45 @@ export const DishManage = () => {
           maxWidth: 'none !important'
         }
       }}>
-      <Box mb={2} display='flex'  justifyContent='space-between' alignItems='center'>
+      <Box mb={2} display='flex' justifyContent='space-between' alignItems='center'>
         <Typography fontSize={24} >Dish Items</Typography>
         <Button variant='outlined' onClick={() => setUploadMore(pre => !pre)}>Upload more: <b>{uploadMore ? 'on' : 'off'}</b></Button>
       </Box>
       <FileUploader handleChange={handleUploadDishItems} name="file" types={fileTypes} />
 
       {isLoading && <CircularProgress />}
-      <Grid container border={1} mt={3} bgcolor={'#333333'}>
-        <Grid item md={7}>
-          <Typography component='p' p={1} color={'white'}>Name</Typography>
-        </Grid>
-        <Grid item md={3}>
-          <Typography component='p' p={1} textAlign='center' color={'white'} borderLeft={1} borderRight={1}>Price</Typography>
-        </Grid>
-        <Grid item md={2}>
-          <Typography component='p' p={1} color={'white'}>Quantity</Typography>
-        </Grid>
-      </Grid>
-
       {Boolean(dishItems.length) ?
         (
-          <Fragment>
-            {
-              dishItems.map((row, index) => (
-                <Grid container border={1} key={index}>
-                  <Grid item md={7}>
-                    <Typography component='p' p={1} whiteSpace='pre-line'>
-                      {row.name}
-                    </Typography>
-                  </Grid>
-                  <Grid item md={3}>
-                    <Typography component='p' p={1} borderLeft={1} borderRight={1}>
-                      {convertToVND(row.price)}
-                    </Typography>
-                  </Grid>
-                  <Grid item md={2}>
-                    <Typography component='p' p={1}>
-                      {row.amount}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              ))
-            }
-            {(() => {
-              const total = dishItems.reduce((a, c) => (a += (c.amount * c.price)), 0)
-              let status = '1'
-
-              if (fees?.subtotal) {
-                status = fees?.subtotal === total ? '2' : '3'
-              }
-              return (
-                <Fragment>
-                  <Typography component='p' display='flex' gap={1} mt={1}>Total: <b>{convertToVND(total)}</b> <span>{messageStatus[status]}</span></Typography>
-                </Fragment>
-              )
-            })()
-            }
-          </Fragment>
+          <TableContainer component={Paper} sx={{ mt: 3, maxHeight: 400 }} >
+            <Table sx={{ minWidth: 650 }} aria-label="simple table" stickyHeader>
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell width={20}>Stt</StyledTableCell>
+                  <StyledTableCell>Món</StyledTableCell>
+                  <StyledTableCell align="right">Giá</StyledTableCell>
+                  <StyledTableCell align="right">Số lượng</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {dishItems.map((row, index) => (
+                  <TableRow
+                    key={index}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell align="left">{index + 1}</TableCell>
+                    <TableCell align="left">
+                      <Typography fontSize={14} fontWeight={600}>{row.name}</Typography>
+                      {row?.optionals?.length && (
+                        <Typography fontSize={12}>{row.optionals.join(', ')}</Typography>
+                      )}
+                    </TableCell>
+                    <TableCell align="right">{convertToVND(row.price)}</TableCell>
+                    <TableCell align="right">{row.amount}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         )
         :
         (

@@ -8,9 +8,15 @@ import { FileUploader } from 'react-drag-drop-files';
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 
+const messageStatus: any = {
+  '1': <Typography fontWeight={600} color={'blue'}>upload fees to compare....</Typography>,
+  '2': <Typography fontWeight={600} color={'#2d5e27'}>valid with fees</Typography>,
+  '3': <Typography fontWeight={600} color={'#fb1919'}>something is wrong, total dish item is not equal with total fee</Typography>,
+}
+
 export const FeesManage = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const { updateFees, fees } = useContext(HomeContext)
+  const { updateFees, fees, dishItems } = useContext(HomeContext)
 
   const handleUploadFee = async (file: any) => {
     setIsLoading(true)
@@ -24,17 +30,20 @@ export const FeesManage = () => {
   }
 
   return (
-    <Box sx={{
+    <Stack sx={{
       'label': {
         maxWidth: 'none !important'
-      }
-    }}>
-      <Typography fontSize={24} mb={2}>Upload Fees (total prices, ship, discount ....)</Typography>
-      <FileUploader handleChange={handleUploadFee} name="file" types={fileTypes} />
+      },
+    }}
+      justifyContent='space-between'
+      height={1}
+    >
+      <Box>
+        <Typography fontSize={24} mb={2}>Fees</Typography>
+        <FileUploader handleChange={handleUploadFee} name="file" types={fileTypes} />
 
-      {isLoading && <CircularProgress />}
+        {isLoading && <CircularProgress />}
 
-      <Box my={3}>
         {
           fees ?
             (
@@ -46,7 +55,28 @@ export const FeesManage = () => {
             )
             : 'Please upload fees'
         }
+
       </Box>
-    </Box>
+      <Box >
+        {(() => {
+          const total = dishItems.reduce((a, c) => (a += (c.amount * c.price)), 0)
+          let status = '1'
+
+          if (fees?.subtotal) {
+            status = fees?.subtotal === total ? '2' : '3'
+          }
+          return (
+            <Fragment>
+              <Typography component='p' display='flex' gap={1} mt={1}>
+                Compare Total: <b>{convertToVND(total)}</b></Typography>
+              <Typography>
+                {messageStatus[status]}
+              </Typography>
+            </Fragment>
+          )
+        })()
+        }
+      </Box>
+    </Stack>
   )
 }

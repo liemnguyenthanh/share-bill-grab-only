@@ -47,10 +47,6 @@ export function parseBillItems(input: string[]) {
     .trim();
 
     const optionals = checkOptionalItem([])
-    if (optionals) {
-      name += ` ${optionals.join('\n')}`
-    }
-
     index += count
 
     // calc price of dish
@@ -60,6 +56,7 @@ export function parseBillItems(input: string[]) {
     parsedItems.push({
       amount: parseFloat(quantity),
       name,
+      optionals,
       price: priceOfDish
     });
   }
@@ -89,9 +86,6 @@ export function parseBillDetails(input: string[]) {
     // Check for discount lines
     if (index !== 0 && index !== 1) {
       let adjustedDiscount = Math.abs(price)
-      console.log({ price, adjustedDiscount, text: textArr[textArr.length - 1] });
-
-
       discount += adjustedDiscount
     }
   })

@@ -6,7 +6,7 @@ import { DishManage, FeesManage, ShareBillResult } from '../molecules';
 export const HomePage = () => {
   return (
     <HomeProvider>
-      <Container>
+      <Container maxWidth='xl'>
         <Grid container columnSpacing={5} my={2}>
           <Grid item md={8}>
             <DishManage />

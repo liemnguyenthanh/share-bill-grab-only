@@ -3,6 +3,7 @@ import React, { useContext, useMemo, useState } from 'react'
 import { Box, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
 import { convertToVND, getTotalMoneyFinal } from '@/utils/helper'
 import { HomeContext } from '@/providers'
+import { StyledTableCell } from '@/components/atoms'
 
 export type DataRowType = {
   fullName: string;
@@ -40,7 +41,7 @@ export const ShareBillResult = () => {
           finalPrice,
           title: item.name
         }
-        
+
         for (let index = 0; index < item.amount; index++) {
           result.push(row)
         }
@@ -65,11 +66,12 @@ export const ShareBillResult = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Tên tuổi</TableCell>
-              <TableCell align="right">Rá cả</TableCell>
-              <TableCell align="right">giảm</TableCell>
-              <TableCell align="right">mân nỳ</TableCell>
-              <TableCell align="right">món</TableCell>
+              <StyledTableCell width={20}>Stt</StyledTableCell>
+              <StyledTableCell>Tên tuổi</StyledTableCell>
+              <StyledTableCell align="right">Rá cả</StyledTableCell>
+              <StyledTableCell align="right">giảm</StyledTableCell>
+              <StyledTableCell align="right">mân nỳ</StyledTableCell>
+              <StyledTableCell align="right">món</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -78,6 +80,7 @@ export const ShareBillResult = () => {
                 key={index}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
+                <TableCell align="left">{index + 1}</TableCell>
                 <TableCell align="right">{row.fullName}</TableCell>
                 <TableCell align="right">{convertToVND(row.price)}</TableCell>
                 <TableCell align="right">{Number(row.discount).toFixed(3)}</TableCell>
