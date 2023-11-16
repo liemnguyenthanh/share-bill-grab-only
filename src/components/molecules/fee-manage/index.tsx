@@ -1,9 +1,9 @@
 'use client'
-import { HomeContext } from '@/providers';
+import { useHomeContext } from '@/providers';
 import { postFile } from '@/services';
-import { convertToVND, parseBillDetails, parseBillItems } from '@/utils/helper';
-import { Box, CircularProgress, Grid, Stack, TextField, Typography } from '@mui/material';
-import { Fragment, useContext, useState } from 'react';
+import { convertToVND, parseBillDetails } from '@/utils/helper';
+import { Box, CircularProgress, Stack, TextField, Typography } from '@mui/material';
+import { Fragment, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 
 const fileTypes = ["JPG", "PNG", "GIF"];
@@ -16,7 +16,7 @@ const messageStatus: any = {
 
 export const FeesManage = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const { updateFees, fees, dishItems, updateTotalMembers } = useContext(HomeContext)
+  const { updateFees, fees, dishItems, updateTotalMembers } = useHomeContext()
 
   const handleUploadFee = async (file: any) => {
     setIsLoading(true)

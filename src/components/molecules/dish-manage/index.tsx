@@ -2,8 +2,9 @@
 import { StyledTableCell } from '@/components/atoms';
 import { HomeContext } from '@/providers';
 import { postFile } from '@/services';
+import { ESteps } from '@/types';
 import { convertToVND, parseBillItems } from '@/utils/helper';
-import { Box, Button, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { useContext, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 
@@ -11,7 +12,7 @@ const fileTypes = ["JPG", "PNG", "GIF"];
 
 export const DishManage = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const { dishItems, updateDishItems, fees } = useContext(HomeContext)
+  const { dishItems, updateDishItems, updateStep } = useContext(HomeContext)
   const [uploadMore, setUploadMore] = useState(false)
 
   const handleUploadDishItems = async (file: any) => {
@@ -45,36 +46,40 @@ export const DishManage = () => {
       {isLoading && <CircularProgress />}
       {Boolean(dishItems.length) ?
         (
-          <TableContainer component={Paper} sx={{ mt: 3, maxHeight: 400 }} >
-            <Table sx={{ minWidth: 650 }} aria-label="simple table" stickyHeader>
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell width={20}>Stt</StyledTableCell>
-                  <StyledTableCell>Món</StyledTableCell>
-                  <StyledTableCell align="right">Giá</StyledTableCell>
-                  <StyledTableCell align="right">Số lượng</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {dishItems.map((row, index) => (
-                  <TableRow
-                    key={index}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <TableCell align="left">{index + 1}</TableCell>
-                    <TableCell align="left">
-                      <Typography fontSize={14} fontWeight={600}>{row.name}</Typography>
-                      {row?.optionals?.length && (
-                        <Typography fontSize={12}>{row.optionals.join(', ')}</Typography>
-                      )}
-                    </TableCell>
-                    <TableCell align="right">{convertToVND(row.price)}</TableCell>
-                    <TableCell align="right">{row.amount}</TableCell>
+          <Stack justifyContent='end' gap={2}>
+            <TableContainer component={Paper} sx={{ mt: 3, maxHeight: 400 }} >
+              <Table sx={{ minWidth: 650 }} aria-label="simple table" stickyHeader>
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell width={20}>Stt</StyledTableCell>
+                    <StyledTableCell>Món</StyledTableCell>
+                    <StyledTableCell align="right">Giá</StyledTableCell>
+                    <StyledTableCell align="right">Số lượng</StyledTableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                </TableHead>
+                <TableBody>
+                  {dishItems.map((row, index) => (
+                    <TableRow
+                      key={index}
+                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                      <TableCell align="left">{index + 1}</TableCell>
+                      <TableCell align="left">
+                        <Typography fontSize={14} fontWeight={600}>{row.name}</Typography>
+                        {row?.optionals?.length && (
+                          <Typography fontSize={12}>{row.optionals.join(', ')}</Typography>
+                        )}
+                      </TableCell>
+                      <TableCell align="right">{convertToVND(row.price)}</TableCell>
+                      <TableCell align="right">{row.amount}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+
+            <Button variant='contained' size='large' color='secondary' onClick={() => updateStep(ESteps.FEES)}>Next Step</Button>
+          </Stack>
         )
         :
         (

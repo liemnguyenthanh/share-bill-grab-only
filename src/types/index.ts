@@ -10,3 +10,10 @@ export type FeeType = {
   shipping: number;
   discount: number;
 }
+
+export enum ESteps {
+  DISH = 0,
+  FEES = 1,
+  TOTAL_USER = 2,
+  RESULT = 3
+}

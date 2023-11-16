@@ -1,9 +1,10 @@
 'use client'
-import { HomeContext } from '@/providers';
+import { HomeContext, useHomeContext } from '@/providers';
 import AccessibleForwardIcon from '@mui/icons-material/AccessibleForward';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
 import PaidIcon from '@mui/icons-material/Paid';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { Box, Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Step from '@mui/material/Step';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
@@ -40,7 +41,7 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
 const ColorlibStepIconRoot = styled('div')<{
   ownerState: { completed?: boolean; active?: boolean };
 }>(({ theme, ownerState }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+  backgroundColor: '#d2d2d2',
   zIndex: 1,
   color: '#fff',
   width: 50,
@@ -61,7 +62,8 @@ const ColorlibStepIconRoot = styled('div')<{
 }));
 
 function ColorlibStepIcon(props: StepIconProps) {
-  const { active, completed, className } = props;
+  const { active, completed, className, icon } = props;
+  const { updateStep } = useHomeContext()
 
   const icons: { [index: string]: React.ReactElement } = {
     1: <SettingsIcon />,
@@ -70,9 +72,15 @@ function ColorlibStepIcon(props: StepIconProps) {
     4: <AccessibleForwardIcon />
   };
 
+  const handleClick = () => {
+    if (completed) {
+      updateStep(parseFloat(String(icon)) - 1)
+    }
+  }
+
   return (
-    <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
-      {icons[String(props.icon)]}
+    <ColorlibStepIconRoot ownerState={{ completed, active }} className={className} onClick={handleClick} sx={{ cursor: completed ? 'pointer' : 'not-allowed' }}>
+      {icons[String(icon)]}
     </ColorlibStepIconRoot>
   );
 }
@@ -81,7 +89,7 @@ const steps = ['Upload dish', 'upload fees', 'fill total users', 'Liem by Calcul
 
 export const Steps = () => {
   const [activeStep, setActiveStep] = React.useState(-1)
-  const { dishItems, fees, totalMembers } = React.useContext(HomeContext)
+  const { dishItems, fees, totalMembers } = useHomeContext()
 
   React.useEffect(() => {
     if (dishItems.length) {
@@ -100,16 +108,19 @@ export const Steps = () => {
     }
   }, [dishItems, fees, totalMembers])
 
-
   return (
-    <Stack sx={{ width: '100%' }} spacing={4} my={3}>
-      <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-    </Stack>
+    <Box pb={23}>
+      <Box position='fixed' width={1} top={0} bgcolor={'#35b760'} zIndex={2} py={5}>
+        <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel StepIconComponent={ColorlibStepIcon}>
+                <Typography fontSize={14} color={'#fff'} textTransform={'capitalize'} fontWeight={600}>{label}</Typography>
+              </StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </Box>
+    </Box>
   );
 }

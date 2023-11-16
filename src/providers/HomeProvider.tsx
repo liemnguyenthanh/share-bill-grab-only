@@ -1,6 +1,6 @@
 'use client';
-import { DishType, FeeType } from '@/types';
-import { PropsWithChildren, createContext, useEffect, useMemo, useState } from 'react';
+import { DishType, ESteps, FeeType } from '@/types';
+import { PropsWithChildren, createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 type HomeType = {
   dishItems: DishType[];
@@ -8,7 +8,9 @@ type HomeType = {
   fees: FeeType | null
   updateFees: (value: FeeType) => void;
   totalMembers: number;
-  updateTotalMembers: (value: number) => void
+  updateTotalMembers: (value: number) => void;
+  stepActive: number;
+  updateStep: (value: number) => void;
 };
 
 export const HomeContext = createContext<HomeType>({
@@ -18,6 +20,8 @@ export const HomeContext = createContext<HomeType>({
   updateFees: () => { },
   totalMembers: 0,
   updateTotalMembers: () => { },
+  stepActive: ESteps.DISH,
+  updateStep: () => { },
 });
 
 type Props = PropsWithChildren;
@@ -26,6 +30,7 @@ export const HomeProvider = ({ children }: Props) => {
   const [dishItems, setDishItems] = useState<DishType[]>([]);
   const [fees, setFees] = useState<FeeType | null>(null);
   const [totalMembers, setTotalMembers] = useState(0)
+  const [stepActive, setActiveStep] = useState<ESteps>(ESteps.DISH)
 
   const updateDishItems = (items: DishType[]) => {
     setDishItems(items)
@@ -39,6 +44,10 @@ export const HomeProvider = ({ children }: Props) => {
     setTotalMembers(value)
   }
 
+  const updateStep = (id: ESteps) => {
+    setActiveStep(id)
+  }
+
   return (
     <HomeContext.Provider
       value={{
@@ -47,10 +56,14 @@ export const HomeProvider = ({ children }: Props) => {
         fees,
         updateFees,
         totalMembers,
-        updateTotalMembers
+        updateTotalMembers,
+        stepActive,
+        updateStep
       }}
     >
       {children}
     </HomeContext.Provider>
   );
 };
+
+export const useHomeContext = () => useContext(HomeContext);

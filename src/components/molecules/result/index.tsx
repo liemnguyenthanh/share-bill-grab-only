@@ -1,9 +1,9 @@
 'use client'
-import React, { useContext, useMemo, useState } from 'react'
-import { Box, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
-import { convertToVND, getTotalMoneyFinal } from '@/utils/helper'
-import { HomeContext } from '@/providers'
 import { StyledTableCell } from '@/components/atoms'
+import { useHomeContext } from '@/providers'
+import { convertToVND, getTotalMoneyFinal } from '@/utils/helper'
+import { Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+import { useMemo } from 'react'
 
 export type DataRowType = {
   fullName: string;
@@ -14,7 +14,7 @@ export type DataRowType = {
 }
 
 export const ShareBillResult = () => {
-  const { dishItems, fees, totalMembers } = useContext(HomeContext)
+  const { dishItems, fees, totalMembers } = useHomeContext()
 
   const dataTable: DataRowType[] = useMemo(() => {
     const result: DataRowType[] = []
