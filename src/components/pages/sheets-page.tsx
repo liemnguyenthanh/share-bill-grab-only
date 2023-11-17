@@ -15,7 +15,6 @@ type Props = {
 }
 
 export const SheetsPage = ({ users }: Props) => {
-
   return (
     <Container>
       <Stack gap={3}>
