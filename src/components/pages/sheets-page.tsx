@@ -18,17 +18,17 @@ export const SheetsPage = ({ users }: Props) => {
 
   return (
     <Container>
-      <Stack gap={1}>
+      <Stack gap={3}>
         {users.map((user, index) => (
-          <Stack key={index} gap={1}>
+          <Stack key={index} gap={1} p={2} borderRadius={4} bgcolor={'#cccccc50'}>
             <Typography>
-              <Typography component='span' fontSize={24} fontWeight={700} color={'blue'}>{user.name}</Typography>
+              <Typography component='span' fontSize={24} fontWeight={700} color={'blue'}>{user.name}🥹🥹🥹🥹🥹🥹</Typography>
               ơi, A/C còn
               <Typography component='span' fontSize={24} color={'red'}> {convertToVND(user.price)} </Typography>
               có vẻ như chưa trả ở name sheet: {user.sheet_name}</Typography>
-            <Typography>Link sheet ở đây nha A/C
+            <Typography>Link sheet ở đây nha A/C 
               <Link href={`${user.sheet_link}#gid=${user.sheet_id}`} target='_blank'>
-                {`${user.sheet_link}#gid=${user.sheet_id}`}
+                Link Full HD (K che)
               </Link>
             </Typography>
 
