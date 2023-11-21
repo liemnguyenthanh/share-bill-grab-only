@@ -1,4 +1,4 @@
-name: Test github action yarn
+name: Test
 on:
   push:
     branches:
