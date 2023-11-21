@@ -1,8 +1,7 @@
-import { SheetsPage } from "@/components/pages"
 
 export default async function Page() {
 
   return (
-    <SheetsPage />
+    <div className="">asd</div>
   )
 }
