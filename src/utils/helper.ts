@@ -1,4 +1,3 @@
-
 export function convertToVND(number: number) {
   if (typeof number !== 'number') {
     return 'Invalid input';

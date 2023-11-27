@@ -1,8 +1,5 @@
-import { SheetsPage } from "@/components/pages"
+import { SheetsPage } from '@/components/pages';
 
 export default async function Page() {
-
-  return (
-    <SheetsPage />
-  )
+  return <SheetsPage />;
 }

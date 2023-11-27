@@ -233,7 +233,7 @@ export const SheetsPage = () => {
                       </Typography>
                       ơi, A/C còn
                       <Typography component="span" fontSize={24} color={'red'}>
-                         {convertToVND(user.price)} 
+                        {convertToVND(user.price)}
                       </Typography>
                       có vẻ như chưa trả ở name sheet: {user.sheet_name}
                     </Typography>
@@ -266,7 +266,7 @@ export const SheetsPage = () => {
           >
             <Image src={QT_IMG} alt="" style={{ width: 150, height: 'auto' }} />
             <Typography fontSize={24} fontWeight={500}>
-              Created by 
+              Created by
               <Typography component="span" color={'#004488'} fontSize={24} fontWeight={600}>
                 <u>Khoa Le</u>
               </Typography>
