@@ -6,7 +6,12 @@
     "dev": "next dev -p 1000",
     "build": "next build",
     "start": "npx serve@latest out -p 2000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettify": "prettier --write src",
+    "pre-commit": "lint-staged",
+    "pre-push": "tsc",
+    "prepare": "husky install",
+    "lint:fix": "eslint --config .eslintrc --fix --cache --ext .ts,.tsx src"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -20,6 +25,8 @@
     "react-swipeable-views": "^0.14.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.8.0",
+    "@commitlint/config-conventional": "^17.8.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -27,7 +34,10 @@
     "autoprefixer": "^10",
     "eslint": "^8",
     "eslint-config-next": "13.5.6",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
     "postcss": "^8",
+    "prettier": "^3.1.0",
     "tailwindcss": "^3",
     "typescript": "^5"
   }
