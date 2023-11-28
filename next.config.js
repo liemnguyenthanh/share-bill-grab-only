@@ -3,8 +3,9 @@ const nextConfig = {
   trailingSlash: true,
   images: { unoptimized: true },
   experimental: {
-    serverActions: true
-  }
+    serverActions: true,
+    serverComponentsExternalPackages: ['mongoose', '@typegoose/typegoose'],
+  },
 };
 
 module.exports = nextConfig;

@@ -4,7 +4,6 @@ import { Box, Container, Stack, Typography, keyframes, styled } from '@mui/mater
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import QT_IMG from '@/assets/images/quynhtrang.png';
 
 type userDataType = {
   name: string[];
@@ -104,7 +103,7 @@ const userData: userDataType[] = [
 ];
 
 const url =
-  'https://script.googleusercontent.com/a/macros/bita.jp/echo?user_content_key=0eE1jmrpuK-mcd2xL4uW_puwAqQWep0EpXaK7VssmP0L-7o6nqX8ME4V0mW-LTMfTLqxmRjw93-aNvl7tlVCwEA0p8Nl-joVm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_nRPgeZU6HP8d3hra3w8XUBVQhQ28DnQkJQL9R93UYiN6yYwVnDGfdKav5zPrJTegw-dYDdJIo-13eZTaZqANCXp3ctOaegirzTwHKX3qPpEq_pzm8kx7G50JyARCyWU63P0nD0x3y64&lib=Mku0QH6I7NxU3vji3EUa3jJJlMbEl9Nie';
+  'https://script.google.com/macros/s/AKfycbyWkdW2vHIVnp2jPbY04gFBS7zcCvUmeBdodRh6klHjsiDrnpWRPUvevsv9ZBwUuaLq/exec';
 
 const getUsersNotPay = async (): Promise<usersType> => {
   const data = await fetch(url);
@@ -221,10 +220,11 @@ export const SheetsPage = () => {
               justifyContent: 'center',
               alignItems: 'center',
               gap: '10px',
+              width: '100%',
             }}
           >
             {users.map((user, index) => (
-              <Stack key={index} gap={1} p={2} borderRadius={4} bgcolor={'#cccccc50'}>
+              <Stack key={index} gap={1} p={2} borderRadius={4} bgcolor={'#cccccc50'} width={1}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <div>
                     <Typography>
@@ -264,9 +264,15 @@ export const SheetsPage = () => {
             flexDirection="column"
             gap={2}
           >
-            <Image src={QT_IMG} alt="" style={{ width: 150, height: 'auto' }} />
+            <Image
+              src={'/images/khoa.png'}
+              alt=""
+              style={{ width: 300, height: 'auto' }}
+              width={300}
+              height={200}
+            />
             <Typography fontSize={24} fontWeight={500}>
-              Created by
+              Created by{' '}
               <Typography component="span" color={'#004488'} fontSize={24} fontWeight={600}>
                 <u>Khoa Le</u>
               </Typography>
