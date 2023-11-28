@@ -15,9 +15,16 @@ export async function getRankItems(filter: RankingFilter = {}) {
     const limit = filter.limit ?? 10;
     const skip = (page - 1) * limit;
 
-    const rankingItems = await Ranking.find().skip(skip).limit(limit).lean().exec();
+    const rankingItems = await Ranking.find()
+      .skip(skip)
+      .limit(limit)
+      .sort({ payment_period: 'desc' })
+      .lean()
+      .exec();
     const list: RankingType[] = rankingItems.map((item) => ({
-      distance_to_now: item.distance_to_now,
+      name: item.name,
+      date: item.date,
+      payment_period: item.payment_period,
       slug: item.slug,
       price: item.price,
     }));

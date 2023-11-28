@@ -1,5 +1,7 @@
 export type RankingType = {
   slug: string;
-  distance_to_now: string;
+  name: string;
+  payment_period: number;
+  date: string;
   price: number;
 };

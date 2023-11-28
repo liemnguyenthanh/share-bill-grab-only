@@ -4,7 +4,6 @@ import { Box, Container, Stack, Typography, keyframes, styled } from '@mui/mater
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import QT_IMG from '@/assets/images/quynhtrang.png';
 
 type userDataType = {
   name: string[];
@@ -221,10 +220,11 @@ export const SheetsPage = () => {
               justifyContent: 'center',
               alignItems: 'center',
               gap: '10px',
+              width: '100%',
             }}
           >
             {users.map((user, index) => (
-              <Stack key={index} gap={1} p={2} borderRadius={4} bgcolor={'#cccccc50'}>
+              <Stack key={index} gap={1} p={2} borderRadius={4} bgcolor={'#cccccc50'} width={1}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <div>
                     <Typography>
@@ -264,9 +264,15 @@ export const SheetsPage = () => {
             flexDirection="column"
             gap={2}
           >
-            <Image src={QT_IMG} alt="" style={{ width: 150, height: 'auto' }} />
+            <Image
+              src={'/images/max.png'}
+              alt=""
+              style={{ width: 300, height: 'auto' }}
+              width={300}
+              height={200}
+            />
             <Typography fontSize={24} fontWeight={500}>
-              Created by
+              Created by{' '}
               <Typography component="span" color={'#004488'} fontSize={24} fontWeight={600}>
                 <u>Khoa Le</u>
               </Typography>

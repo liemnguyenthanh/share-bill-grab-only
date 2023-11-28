@@ -22,10 +22,13 @@ class RankingSchema {
   @prop({ required: true, unique: true })
   slug: string;
 
-  @prop({ default: false })
-  distance_to_now: string;
-
   _id: mongoose.Types.ObjectId | string;
+
+  name: string;
+
+  payment_period: number;
+
+  date: string;
 
   price: number;
 }
