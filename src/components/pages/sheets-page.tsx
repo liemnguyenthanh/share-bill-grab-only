@@ -265,7 +265,7 @@ export const SheetsPage = () => {
             gap={2}
           >
             <Image
-              src={'/images/max.png'}
+              src={'/images/khoa.png'}
               alt=""
               style={{ width: 300, height: 'auto' }}
               width={300}

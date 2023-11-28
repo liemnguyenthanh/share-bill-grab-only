@@ -21,7 +21,7 @@ export const Ranking = ({ rankingItems }: Props) => {
       p={2}
     >
       <Typography fontWeight={500} fontSize={24} textAlign="center">
-        Top 10 người hên nhất bitA
+        Top 10 người nợ lâu nhất bitA
       </Typography>
       <Stack gap={1}>
         {rankingItems.map((item, index) => (
