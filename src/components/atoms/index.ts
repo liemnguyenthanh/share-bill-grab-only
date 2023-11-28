@@ -1,2 +1,2 @@
-export * from './ClientOnly';
+export * from './FrontendOnly';
 export * from './Loading';

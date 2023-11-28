@@ -1,4 +1,4 @@
-import ClientOnly from '@/components/atoms/ClientOnly';
+import { ClientOnly } from '@/components/atoms';
 import { MainLayout } from '@/components/layouts';
 import { Ranking } from '@/components/molecules/Ranking';
 import { SheetsPage } from '@/components/pages';
