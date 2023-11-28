@@ -1,7 +1,7 @@
 'use client';
 import { RankingType } from '@/types';
 import { convertToVND, getDate, getTimeAgo } from '@/utils/helper';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Chip, Stack, Typography } from '@mui/material';
 import React from 'react';
 
 type Props = {
@@ -25,24 +25,37 @@ export const Ranking = ({ rankingItems }: Props) => {
       </Typography>
       <Stack gap={1}>
         {rankingItems.map((item, index) => (
-          <Box key={index} mb={1.5} pb={1.5} borderBottom={2} borderColor={'white'}>
+          <Box
+            key={index}
+            mb={1.5}
+            pb={1.5}
+            borderBottom={2}
+            borderColor={'white'}
+            bgcolor={'wheat'}
+            borderRadius={4}
+            padding={2}
+          >
             <Box display="flex" alignItems="center" gap={2}>
               <Box
                 borderRadius={50}
                 p={1}
-                bgcolor={'white'}
                 width="fit-content"
                 mb={1}
                 display="flex"
                 alignItems="end"
               >
-                <Typography
-                  fontSize={
-                    index < 4 ? 40 * ((rankingItems.length - index) / rankingItems.length) : 14
+                <Chip
+                  label={
+                    <Typography
+                      fontSize={
+                        index < 4 ? 24 * ((rankingItems.length - index) / rankingItems.length) : 14
+                      }
+                    >
+                      No.{index + 1}
+                    </Typography>
                   }
-                >
-                  No.{index + 1}
-                </Typography>
+                  color="error"
+                />
               </Box>
 
               <Typography fontSize={24} fontWeight={500} textTransform="capitalize">
