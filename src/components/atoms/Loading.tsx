@@ -1,3 +1,4 @@
+'use client';
 import { Box, keyframes } from '@mui/material';
 import { styled } from '@mui/system';
 import React from 'react';
