@@ -62,7 +62,7 @@ export function findClosestMatch(inputName: string) {
   });
 
   // Check if the match is at least 80%
-  if ((inputName.length - minDistance) / inputName.length >= 0.8) {
+  if ((inputName.length - minDistance) / inputName.length >= 0.6) {
     // Return the closest match
     return closestMatch;
   } else {
