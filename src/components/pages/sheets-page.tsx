@@ -2,7 +2,16 @@
 import { getUnpaidUsers } from '@/services/sheet';
 import { UsersType } from '@/types';
 import { convertToVND, findClosestMatch } from '@/utils/helper';
-import { Avatar, Container, Divider, Stack, Typography, keyframes, styled } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Container,
+  Divider,
+  Stack,
+  Typography,
+  keyframes,
+  styled,
+} from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -10,11 +19,11 @@ import { Loading } from '../atoms';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 
 const StyledContainer = styled(Container)({
-  color: 'red',
+  color: 'green',
 });
 
 const StyledStack = styled(Stack)({
-  backgroundColor: 'red',
+  backgroundColor: '#fec8d8',
   borderRadius: '16px',
   alignItems: 'center',
 });
@@ -40,7 +49,12 @@ export const SheetsPage = () => {
           <Loading />
         ) : users.length > 0 ? (
           <StyledStack gap={2} padding={2}>
-            <Image alt="Where is the money?" src="/images/money.png" width={300} height={200} />
+            <Stack>
+              <Image alt="Where is the money?" src="/images/cat.gif" width={300} height={200} />
+              <Typography style={{ position: 'absolute' }} color={'white'}>
+                A/c chuyển tìn giúp iem ạ
+              </Typography>
+            </Stack>
             {users.map((user, index) => (
               <StyledStack key={index}>
                 <Grid
@@ -49,7 +63,7 @@ export const SheetsPage = () => {
                   alignItems={'center'}
                   padding={2}
                   borderRadius={4}
-                  bgcolor={'wheat'}
+                  bgcolor={'#BED8FF'}
                 >
                   <Grid xs={8}>
                     <Typography>
@@ -94,13 +108,22 @@ export const SheetsPage = () => {
             justifyContent="center"
             flexDirection="column"
           >
-            <Image
-              src={'/images/khoa.png'}
-              alt=""
-              style={{ width: 300, height: 'auto' }}
-              width={300}
-              height={200}
-            />
+            <Box display={'flex'}>
+              <Image
+                src={'/images/khoa.png'}
+                alt=""
+                style={{ width: 300, height: 'auto' }}
+                width={300}
+                height={200}
+              />
+              <Image
+                src={'/images/dancing.gif'}
+                alt=""
+                style={{ width: 300, height: 'auto' }}
+                width={300}
+                height={200}
+              />
+            </Box>
             <Typography fontSize={24} fontWeight={500}>
               Created by{' '}
               <Typography component="span" color={'#004488'} fontSize={24} fontWeight={600}>

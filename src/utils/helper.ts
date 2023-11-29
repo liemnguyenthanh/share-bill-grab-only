@@ -1,4 +1,4 @@
-import { userData } from '@/constants';
+import { defaultImage, userData } from '@/constants';
 
 export function convertToVND(number: number) {
   if (typeof number !== 'number') {
@@ -54,14 +54,21 @@ export function findClosestMatch(inputName: string) {
 
       // Update closestMatch if the current distance is smaller
       if (distance < minDistance) {
+        console.log(distance);
         minDistance = distance;
         closestMatch = user.url;
       }
     });
   });
 
-  // Return the closest match
-  return closestMatch;
+  // Check if the match is at least 80%
+  if ((inputName.length - minDistance) / inputName.length >= 0.8) {
+    // Return the closest match
+    return closestMatch;
+  } else {
+    // Return the default URL
+    return defaultImage;
+  }
 }
 
 // Function to calculate Levenshtein distance between two strings
