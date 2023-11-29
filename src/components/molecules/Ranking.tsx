@@ -15,35 +15,26 @@ export const Ranking = ({ rankingItems }: Props) => {
       flexShrink={0}
       position="sticky"
       top={10}
-      height={1}
       borderRadius={4}
-      bgcolor={'#ff1818'}
+      bgcolor={'#fec8d8'}
       p={2}
     >
       <Typography fontWeight={500} fontSize={24} textAlign="center">
         Top 10 người nợ lâu nhất bitA
       </Typography>
-      <Stack gap={1}>
+      <Stack>
         {rankingItems.map((item, index) => (
           <Box
             key={index}
             mb={1.5}
             pb={1.5}
-            borderBottom={2}
             borderColor={'white'}
-            bgcolor={'wheat'}
+            bgcolor={'#BED8FF'}
             borderRadius={4}
             padding={2}
           >
             <Box display="flex" alignItems="center" gap={2}>
-              <Box
-                borderRadius={50}
-                p={1}
-                width="fit-content"
-                mb={1}
-                display="flex"
-                alignItems="end"
-              >
+              <Box borderRadius={50} width="fit-content" display="flex" alignItems="end">
                 <Chip
                   label={
                     <Typography

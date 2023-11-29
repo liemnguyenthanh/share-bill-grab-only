@@ -58,7 +58,7 @@ export const userData: UserDataType[] = [
     url: '/images/nam.png',
   },
   {
-    name: ['Nguyet'],
+    name: ['Nguyet', 'Nguyệt'],
     url: '/images/nguyet.png',
   },
   {
@@ -82,6 +82,8 @@ export const userData: UserDataType[] = [
     url: '/images/vu.png',
   },
 ];
+
+export const defaultImage = '/images/default.png';
 
 export const SHEET_URL =
   'https://script.google.com/macros/s/AKfycbyWkdW2vHIVnp2jPbY04gFBS7zcCvUmeBdodRh6klHjsiDrnpWRPUvevsv9ZBwUuaLq/exec';
