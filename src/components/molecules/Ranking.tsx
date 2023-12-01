@@ -2,13 +2,23 @@
 import { RankingType } from '@/types';
 import { convertToVND, getDate, getTimeAgo } from '@/utils/helper';
 import { Box, Chip, Stack, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-type Props = {
-  rankingItems: RankingType[];
-};
+export const Ranking = () => {
+  const [rankingItems, setRankingItems] = useState<RankingType[]>([]);
 
-export const Ranking = ({ rankingItems }: Props) => {
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch('/api/ranking');
+      const data = await response.json();
+
+      if (data.list?.length) {
+        setRankingItems(data.list);
+      }
+    };
+    getData();
+  }, []);
+
   return (
     <Stack
       gap={2}

@@ -1,17 +1,12 @@
-import { ClientOnly } from '@/components/atoms';
+'use client';
 import { MainLayout } from '@/components/layouts';
 import { Ranking } from '@/components/molecules/Ranking';
 import { SheetsPage } from '@/components/pages';
-import { getRankItems } from '@/lib/controller';
 
-export default async function Page() {
-  const rankingItems = await getRankItems();
-
+export default function Page() {
   return (
     <MainLayout>
-      <ClientOnly>
-        <Ranking rankingItems={rankingItems.list ?? []} />
-      </ClientOnly>
+      <Ranking />
       <SheetsPage />
     </MainLayout>
   );
