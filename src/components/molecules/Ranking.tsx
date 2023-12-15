@@ -9,7 +9,7 @@ export const Ranking = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch('/api/ranking');
+      const response = await fetch('/api/ranking', { cache: 'no-store' });
       const data = await response.json();
 
       if (data.list?.length) {
